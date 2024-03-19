@@ -6,8 +6,8 @@ resources:
   repositories:
     - repository: task_templates
       endpoint: sede-res
-      type: git
-      name: dts-tooling-templates
+      type: github
+      name: seops-dts-tooling-templates
       ref: refs/tags/v8.x
 
 pool:
