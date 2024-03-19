@@ -1,0 +1,25 @@
+stages:
+  - stage: TestIfVariableGroupsExist
+    displayName: Test_If_Variable_Groups_Exist
+    jobs:
+      - job: Test_3_All_Variable_Groups_Exist  #DesiredTestingOutcome: Pipeline runs
+        variables:
+          - group: Mend Variables
+          - group: SonarQube Variables
+          - group: CDK Variables
+        steps:
+          - checkout: task_templates
+          - checkout: self
+          - template: task/mend-scan.yml@task_templates
+          - template: task-group/sonarqube-scan.yml@task_templates
+      - job: Test_4_All_Variable_Groups_Exist_on_Amazon_Linux_Image #DesiredTestingOutcome: Pipeline runs
+        pool: AWS-Tooling-Dev-Release
+        variables:
+          - group: Mend Variables
+          - group: SonarQube Variables
+          - group: CDK Variables
+        steps:
+          - checkout: task_templates
+          - checkout: self
+          - template: task/mend-scan.yml@task_templates
+          - template: task-group/sonarqube-scan.yml@task_templates

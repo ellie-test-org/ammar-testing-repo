@@ -1,0 +1,20 @@
+---
+trigger:
+  - main
+
+resources:
+  repositories:
+    - repository: task_templates
+      endpoint: sede-res
+      type: git
+      name: dts-tooling-templates
+      ref: refs/tags/v8.x
+
+pool:
+  vmImage: ubuntu-latest
+
+#Note: Remember to add the variable groups (Mend Variables, SonarQube Variables, CDK Variables) 
+# to the 'stage' or 'job' level in your testing template
+
+stages:
+  - template: templates/test-variable-groups.yml
